@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  analyzer_service:
+    build:
+      context: ./analyzer_service
+      dockerfile: Dockerfile
+    env_file:
+      - ./analyzer_service/.env
+    ports:
+      - "5001:5000"
+    depends_on:
+      - postgres
+
+  auth_service:
+    build:
+      context: ./auth_service
+      dockerfile: Dockerfile
+    env_file:
+      - ./auth_service/.env
+    ports:
+      - "5002:5000"
+    depends_on:
+      - mysql
+
+  integration_service:
+    build:
+      context: ./integration_service
+      dockerfile: Dockerfile
+    env_file:
+      - ./integration_service/.env
+    ports:
+      - "5003:5000"
+
+  mining_service:
+    build:
+      context: ./mining_service
+      dockerfile: Dockerfile
+    env_file:
+      - ./mining_service/.env
+    ports:
+      - "5004:5000"
+    depends_on:
+      - mongo
+
+  frontend_service:
+    build:
+      context: ./frontend_service
+      dockerfile: Dockerfile
+    ports:
+      - "5005:5000"
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: youruser
+      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: analyzer_db
+    ports:
+      - "5432:5432"
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: auth_db
+      MYSQL_USER: youruser
+      MYSQL_PASSWORD: yourpassword
+    ports:
+      - "3306:3306"
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"

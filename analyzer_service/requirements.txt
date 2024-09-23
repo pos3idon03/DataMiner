@@ -1,0 +1,7 @@
+flask-cors>=4.0.0    # If cross-origin resource sharing is needed
+flask==2.3.2
+pandas==2.1.0
+numpy==1.26.0
+SQLAlchemy==2.0.34
+#scikit-learn==1.3.0  # Optional, if you're doing some machine learning
+#requests==2.31.0     # If you're making HTTP requests to other services
