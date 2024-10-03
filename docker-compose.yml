@@ -1,4 +1,4 @@
-version: '3.8'
+# version: '3.8'
 
 services:
   analyzer_service:
@@ -9,8 +9,8 @@ services:
       - ./analyzer_service/.env
     ports:
       - "5001:5000"
-    depends_on:
-      - postgres
+    # depends_on:
+    #   - postgres
 
   auth_service:
     build:
@@ -20,8 +20,8 @@ services:
       - ./auth_service/.env
     ports:
       - "5002:5000"
-    depends_on:
-      - mysql
+    # depends_on:
+    #   - mysql
 
   integration_service:
     build:
@@ -40,8 +40,8 @@ services:
       - ./mining_service/.env
     ports:
       - "5004:5000"
-    depends_on:
-      - mongo
+    # depends_on:
+    #   - mongo
 
   frontend_service:
     build:
@@ -50,26 +50,26 @@ services:
     ports:
       - "5005:5000"
 
-  postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: youruser
-      POSTGRES_PASSWORD: yourpassword
-      POSTGRES_DB: analyzer_db
-    ports:
-      - "5432:5432"
+  # postgres:
+  #   image: postgres:latest
+  #   environment:
+  #     POSTGRES_USER: youruser
+  #     POSTGRES_PASSWORD: yourpassword
+  #     POSTGRES_DB: analyzer_db
+  #   ports:
+  #     - "5432:5432"
 
-  mysql:
-    image: mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: auth_db
-      MYSQL_USER: youruser
-      MYSQL_PASSWORD: yourpassword
-    ports:
-      - "3306:3306"
+  # mysql:
+  #   image: mysql:latest
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: rootpassword
+  #     MYSQL_DATABASE: auth_db
+  #     MYSQL_USER: youruser
+  #     MYSQL_PASSWORD: yourpassword
+  #   ports:
+  #     - "3306:3306"
 
-  mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
+  # mongo:
+  #   image: mongo:latest
+  #   ports:
+  #     - "27017:27017"
